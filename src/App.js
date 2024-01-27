@@ -1,13 +1,18 @@
 
 import './App.css';
-
+import Body from './components/Body';
+import { createBrowserRouter, Outlet, RouterProvider } from 'react-router-dom';
 function App() {
   return (
-    <div className="text-3xl font-bold text-green-800
-    ">
-      Hello World
+    <div>
+      <Body></Body>
+
     </div>
+
+
   );
+
+
 }
 
 export default App;
