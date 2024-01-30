@@ -3,7 +3,7 @@ import React from 'react'
 const Error = () => {
     return (
         <div>
-            Maushichi Gand
+            <h1 className='text-3xl'>Maushichi Gand</h1>
         </div>
     )
 }

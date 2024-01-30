@@ -4,12 +4,14 @@ import checkValidate from '../utils/validate';
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "./firebase";
-import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { addUser } from '../utils/userSlice';
 
 const Login = () => {
-    const navigate = useNavigate();
+
     const [isItSignIn, SetIsItSign] = useState(true);
     const [errorMessage, setErrorMessage] = useState(null);
+    const dispatch = useDispatch();
     const toggleSignIn = () => {
 
         SetIsItSign(!isItSignIn);
@@ -35,13 +37,18 @@ const Login = () => {
                     updateProfile(user, {
                         displayName: name.current.value, photoURL: "https://t4.ftcdn.net/jpg/01/22/63/19/360_F_122631967_ZDhcU71c9QfNccYflAiRDlNA8ef9ps0E.jpg"
                     }).then(() => {
-                        navigate("/browse");
+                        const uid = auth.currentUser;
+                        const email = auth.currentUser;
+                        const displayName = auth.currentUser;
+                        const photoURL = auth.currentUser;
+                        dispatch(addUser(uid, email, displayName, photoURL));
+
                         // Profile updated!
                         // ...
                     }).catch((error) => {
                         setErrorMessage(error);
                     });
-                    console.log(user);
+
 
 
                     // ...
@@ -58,8 +65,8 @@ const Login = () => {
                 .then((userCredential) => {
                     // Signed in 
                     const user = userCredential.user;
-                    navigate("/browse");
-                    console.log(user)
+
+
 
                     // ...
                 })
